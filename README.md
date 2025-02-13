@@ -55,6 +55,21 @@ with the command: "summary(data)" we anaylze our variables:
 After that visualize the distribution of each variable
 
 
+![f95f9db8-6b33-4c61-a7b5-9a0b30938a08](https://github.com/user-attachments/assets/9764f08b-5bd9-48f2-b95a-13d544f2aa8d)
+![f2fcd318-097c-4e1c-9197-98f5db3a6913](https://github.com/user-attachments/assets/6438e391-8e53-4325-84b9-9c512d871778)
+![d34a7875-8681-4022-8c83-12171c0838c1](https://github.com/user-attachments/assets/825215e5-0830-41b6-aaef-e75d962eff44)
+![c25421c0-2d63-431a-b042-856988d69e3a](https://github.com/user-attachments/assets/bc23825c-527b-4cd6-b50c-b865f587c2ec)
+![c15dc0d6-2da8-408e-b9ff-5e54a093f0b9](https://github.com/user-attachments/assets/e14757c0-96e2-4d92-90aa-d5d11e5ec5a9)
+![b59b5fa2-2d2b-4020-bbe8-0abaab06d1ea](https://github.com/user-attachments/assets/7d62ac40-9ec2-4205-8c4a-04c40bfd4e97)
+![2514110d-2ae9-4339-bdf5-02d212177fd1](https://github.com/user-attachments/assets/16539c43-9e10-4000-9aac-26ade64f10fc)
+![902f4ab1-7490-493b-a225-b421a2fbd38d](https://github.com/user-attachments/assets/167db195-66ad-4ef9-8534-2973a21dbf19)
+![210f7ea3-ecf4-4922-8ad7-aae32d410004](https://github.com/user-attachments/assets/3189137e-e74b-47eb-962b-f259097e0aed)
+![160f146e-4a13-4e8c-9dc8-3c1cf1d10195](https://github.com/user-attachments/assets/83c7c4ca-3ba0-4c3f-9f1f-459152ee6077)
+![19a5b473-1640-4779-9a39-ae4ccdd0699a](https://github.com/user-attachments/assets/e42cfa9a-4ace-4d5d-8ecd-564a091106ba)
+![8a08fcfe-4ddb-406b-837c-b76572c95497](https://github.com/user-attachments/assets/78722776-38a3-4493-ab73-740db5a3b8cf)
+![3de430e4-0729-4c05-ba5b-6f3ef6ab3d9b](https://github.com/user-attachments/assets/9e2955b0-d93e-44a1-9cd9-a35f15ac4e44)
+![0cc02b3e-60fa-4812-a873-a4bae6e0103c](https://github.com/user-attachments/assets/17a939a1-a9a0-4556-afdc-1e536d35acb7)
+![0a9c50fd-38f3-4a7c-9be2-6c85b5c7d3cb](https://github.com/user-attachments/assets/3dea6d6d-d6a1-409f-8e80-d4207003af65)
 
 ## Financial Learning  
 ...  
