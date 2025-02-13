@@ -134,20 +134,141 @@ Now watch the Correlation matrix
 ## Financial Learning  
 To predict the "Flag" variable (which indicates if a company has defaulted), you could use the following models:
 
+
+METTERE SUMMARY DEI TEST E TRAINING SET
+
+MEttere pro e contro di ogni modello
+e la toeria dietro
+   
 1. **Logistic Regression**  
-   - **Pros**: Simple, interpretable, works well for binary classification.  
-   - **Cons**: May struggle with complex, non-linear relationships.
+
+confusion matrix on the result of logistic regression
+
+Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
+
+---
+
+## Logistic Regression Model Evaluation
+
+### Confusion Matrix
+
+| Prediction | 0   | 1   |
+|------------|-----|-----|
+| **0**      | 578 | 30  |
+| **1**      | 4   | 2   |
+
+### Performance Metrics
+
+| Metric                             | Value         |
+|------------------------------------|---------------|
+| **Accuracy**                       | 94.46%        |
+| **95% Confidence Interval**        | (92.35%, 96.14%) |
+| **No Information Rate**            | 94.79%        |
+| **P-Value [Acc > NIR]**            | 0.6827        |
+| **Kappa**                          | 0.0903        |
+| **McNemar's Test P-Value**         | 1.807e-05     |
+| **Sensitivity (Recall)**           | 99.31%        |
+| **Specificity**                    | 6.25%         |
+| **Positive Predictive Value (Precision)** | 95.07%   |
+| **Negative Predictive Value**      | 33.33%        |
+| **Prevalence**                     | 94.79%        |
+| **Detection Rate**                 | 94.14%        |
+| **Detection Prevalence**           | 99.02%        |
+| **Balanced Accuracy**              | 52.78%        |
+
+### Notes:
+- The **model** shows high sensitivity (99.31%) but **low specificity** (6.25%).
+- **Accuracy** is 94.46%, but the low specificity suggests that the model might be biased toward predicting the majority class (0).
+- **Kappa** is low, indicating that the agreement between predicted and actual values is not great.
+- The **positive class** is 0 in this case, as shown in the "Positive Class" row.
+
+  
+![fa3a99a1-9f84-4f07-9982-7216228b6872](https://github.com/user-attachments/assets/beb45a47-0b9d-4e02-82c3-7a30312951e2)
+
+
+
+
 
 2. **Random Forest**  
    - **Pros**: Handles non-linearities well, robust to overfitting with many trees.  
    - **Cons**: Can be less interpretable, requires tuning.
+  
+3. Ecco come puoi organizzare i risultati in tabelle per il tuo README di GitHub:
+
+### Confusion Matrix
+
+| Prediction | 0   | 1   |
+|------------|-----|-----|
+| **0**      | 576 | 15  |
+| **1**      | 6   | 17  |
+
+### Statistiche del Modello
+
+| **Statistica**           | **Valore**  |
+|--------------------------|-------------|
+| **Accuracy**             | 0.9658      |
+| **95% CI**               | (0.9482, 0.9787) |
+| **No Information Rate**  | 0.9479      |
+| **P-Value [Acc > NIR]**  | 0.02315     |
+| **Kappa**                | 0.6008      |
+| **Mcnemar's Test P-Value**| 0.08086    |
+| **Sensitivity**          | 0.9897      |
+| **Specificity**          | 0.5312      |
+| **Positive Predictive Value** | 0.9746  |
+| **Negative Predictive Value** | 0.7391 |
+| **Prevalence**           | 0.9479      |
+| **Detection Rate**       | 0.9381      |
+| **Detection Prevalence** | 0.9625      |
+| **Balanced Accuracy**    | 0.7605      |
+
 
 5. **Neural Networks**  
    - **Pros**: Powerful for complex patterns in large datasets.  
    - **Cons**: Requires a large amount of data, difficult to interpret.
 
+[Quartz 4.pdf](https://github.com/user-attachments/files/18789959/Quartz.4.pdf)
+
+Ecco la tabella con i risultati per il README di GitHub:
+
+### Confusion Matrix and Statistics
+
+| Prediction | 0   | 1   |
+|------------|-----|-----|
+| **0**      | 0   | 0   |
+| **1**      | 582 | 32  |
+
+#### Metrics:
+
+| Metric                        | Value        |
+|-------------------------------|--------------|
+| **Accuracy**                   | 0.0521       |
+| **95% CI**                     | (0.0359, 0.0728) |
+| **No Information Rate**        | 0.9479       |
+| **P-Value [Acc > NIR]**        | 1            |
+| **Kappa**                      | 0            |
+| **Mcnemar's Test P-Value**     | <2e-16       |
+| **Sensitivity**                | 0.00000      |
+| **Specificity**                | 1.00000      |
+| **Pos Pred Value**             | NaN          |
+| **Neg Pred Value**             | 0.05212      |
+| **Prevalence**                 | 0.94788      |
+| **Detection Rate**             | 0.00000      |
+| **Detection Prevalence**       | 0.00000      |
+| **Balanced Accuracy**          | 0.50000      |
+| **'Positive' Class**           | 0            |
+
+![e3dcf7c8-8195-4f40-a7c1-ce7b0aa3285e](https://github.com/user-attachments/assets/9b16bd9b-1382-4218-b128-57c566c839d2)
+
+
+
+
+## MOdels confront
+
+
+
 
 ## Bayesian Learning  
+
 ...  
 
 ## Conclusions  
