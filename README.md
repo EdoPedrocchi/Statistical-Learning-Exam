@@ -15,6 +15,11 @@ Title, Author
 2. Your thesis (research question)
 3. Models employed (and related R packages) 4. Main empirical findings
 
+
+Our goal: predict the defalut of a company 1 year before.
+
+Find research topic similar
+
 ## Dataset  
 The dataset includes financial indicators (in standardised values) for a sample of 2049 Italian small-medium enterprises (SMEs) in 2018 and information about their status (Flag variable; 0=Active, 1=Defaulted) one year later.
 
@@ -70,6 +75,38 @@ After that visualize the distribution of each variable
 ![3de430e4-0729-4c05-ba5b-6f3ef6ab3d9b](https://github.com/user-attachments/assets/9e2955b0-d93e-44a1-9cd9-a35f15ac4e44)
 ![0cc02b3e-60fa-4812-a873-a4bae6e0103c](https://github.com/user-attachments/assets/17a939a1-a9a0-4556-afdc-1e536d35acb7)
 ![0a9c50fd-38f3-4a7c-9be2-6c85b5c7d3cb](https://github.com/user-attachments/assets/3dea6d6d-d6a1-409f-8e80-d4207003af65)
+
+
+Now boxplots
+
+![fff2aec3-1397-42e2-8525-80f8f6633ca7](https://github.com/user-attachments/assets/288fd60a-2e79-4b7f-a2c0-5a9cee8fe662)
+![eec71af9-66e7-425f-9efc-c903757e3283](https://github.com/user-attachments/assets/21d1ec4b-bdd4-4d70-a8a3-b906aa2845de)
+![eaacdc39-4ca8-4068-82c5-d83cde696ec4](https://github.com/user-attachments/assets/e67109e1-6939-48be-b44e-e6ef45966aa5)
+![e830774e-74e6-410c-8216-78a6bff54e2b](https://github.com/user-attachments/assets/fb47d053-eaba-4418-a470-6f1720f80aeb)
+![dabd14a2-b5e5-426a-8bc2-4bcbba9305d9](https://github.com/user-attachments/assets/c97d3b38-796c-4c9a-b06c-42172a434645)
+![c8ae6f4b-9bfa-453a-b3a0-2b1d7938d4fa](https://github.com/user-attachments/assets/7561e837-6ad9-4be4-9c9d-5f46ee21b709)
+![a81fc231-7737-4d08-b514-421a4ac0a8c3](https://github.com/user-attachments/assets/a91fcc88-1bb5-48c2-a348-14f8874020c1)
+![8928b899-81cd-4135-9c10-c388c1bb0912](https://github.com/user-attachments/assets/943bf576-a2f0-4506-ac57-fe288c824fe5)
+![5598f254-4d55-40a7-bf22-ff73d66201b2](https://github.com/user-attachments/assets/11201d73-0002-4b88-9999-9bf6349fbbbe)
+![919e8a45-6d1f-4fa4-95f2-eb4ece9a7233](https://github.com/user-attachments/assets/be03b9e2-255b-4b04-a9bb-35b0663467ae)
+![98d8daac-f2c2-4e70-b8fa-d4e41ae5ca58](https://github.com/user-attachments/assets/5065c589-fe37-4331-8443-0c0b756264b3)
+![40a7deef-d602-4059-bf10-3184681967e6](https://github.com/user-attachments/assets/39f4f485-1f7f-4149-bfd4-742d2a69a201)
+![7da5027c-6f5f-4fbb-a889-584cc6e8c954](https://github.com/user-attachments/assets/41cfe1de-c716-4832-8806-546f7fb03a8b)
+![2bf34b73-c2a4-4583-8128-fa8e7c62d4cd](https://github.com/user-attachments/assets/c269da41-ebe0-4254-be84-3eb1049a2730)
+![1b7edd59-0eeb-4d2a-a828-0c02824e517c](https://github.com/user-attachments/assets/04cb49d5-596a-467f-9a74-54fae1d5a137)
+
+Watch the cake of our target variable
+| Status | Count |
+|--------|-------|
+| 0      | 1909  |
+| 1      | 140   |
+
+![2d243929-f63b-4d16-8f84-fb7e3d8a01ae](https://github.com/user-attachments/assets/32e60974-2dda-44a2-a52c-7a9d55852ac0)
+
+
+
+Now watch the Correlation matrix
+![407a8455-8dcc-4c39-83b5-e6acdec54770](https://github.com/user-attachments/assets/22ea6c9b-21e5-42a6-af13-38f3b8386147)
 
 ## Financial Learning  
 ...  
