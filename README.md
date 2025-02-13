@@ -132,7 +132,20 @@ Now watch the Correlation matrix
 
 
 ## Financial Learning  
-...  
+To predict the "Flag" variable (which indicates if a company has defaulted), you could use the following models:
+
+1. **Logistic Regression**  
+   - **Pros**: Simple, interpretable, works well for binary classification.  
+   - **Cons**: May struggle with complex, non-linear relationships.
+
+2. **Random Forest**  
+   - **Pros**: Handles non-linearities well, robust to overfitting with many trees.  
+   - **Cons**: Can be less interpretable, requires tuning.
+
+5. **Neural Networks**  
+   - **Pros**: Powerful for complex patterns in large datasets.  
+   - **Cons**: Requires a large amount of data, difficult to interpret.
+
 
 ## Bayesian Learning  
 ...  
