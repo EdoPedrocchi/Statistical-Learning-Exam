@@ -101,81 +101,104 @@ print(flag_df)
 ##### se vuoi verificare megli orelazione tra due variabili usa scatter plot
 
 
+############Financial Learning#########
 
-
-
-
-######################### bayes ########
-library(e1071)
-library(recipes)
-library(lattice)
+library(tidyverse)
 library(caret)
+library(randomForest)
+library(neuralnet)
+library(pROC)
 
 
 
-data$Flag <- as.factor(data$Flag)  # Convertire la variabile target in fattore
-
-# Dividere i dati in training e test
 set.seed(123)
-train_ratio <- 0.8
-train_index <- sample(seq_len(nrow(data)), size = floor(train_ratio * nrow(data)))
 
-# Create training and test sets
-train_data <- data[train_index, ]
-test_data <- data[-train_index, ]
+# Dividi il dataset in training (70%) e test (30%)
+trainIndex <- createDataPartition(data$Flag, p = 0.7, list = FALSE)
+trainData <- data[trainIndex, ]
+testData <- data[-trainIndex, ]
 
-# Modello Naïve Bayes
-model <- naiveBayes(Flag ~ ., data = train_data)
+# Salva la variabile target
+trainFlag <- trainData$Flag
+testFlag <- testData$Flag
 
-# Predizioni
-y_pred <- predict(model, test_data)
+# Rimuovi la variabile target per standardizzare solo le feature
+trainFeatures <- trainData[, setdiff(names(trainData), "Flag")]
+testFeatures <- testData[, setdiff(names(testData), "Flag")]
 
+# Standardizza le feature
+preProcessValues <- preProcess(trainFeatures, method = c("center", "scale"))
+trainFeatures <- predict(preProcessValues, trainFeatures)
+testFeatures <- predict(preProcessValues, testFeatures)
 
-
-# Create a confusion matrix manually using table()
-conf_matrix <- table(Predicted = y_pred, Actual = test_data$Flag)
-
-# Print the confusion matrix
-print(conf_matrix)
-
-
-# Visualizzazione delle probabilità
-probabilities <- predict(model, test_data, type = "raw")
-test_data$Predicted_Prob <- probabilities[, 2]
-
-ggplot(test_data, aes(x = Predicted_Prob, fill = Flag)) +
-  geom_histogram(position = "identity", alpha = 0.5, bins = 20) +
-  labs(title = "Distribuzione delle Probabilità Predette",
-       x = "Probabilità di Default",
-       y = "Frequenza") +
-  theme_minimal()
+# Riaggiungi la variabile target intatta
+trainData <- cbind(trainFeatures, Flag = trainFlag)
+testData <- cbind(testFeatures, Flag = testFlag)
 
 
+summary(trainData)
+summary(testData)
 
-x<-rnorm(100)
-par(mfrow=c(2,1))
-theta=0.9
-z<-rep(0,101)
-for (i in 1:100) {z[i+1]<-(theta*z[i]+x[i])}; plot(z,type=’l’)
-theta<- -theta
-z<-rep(0,101)
-for (i in 1:100) {z[i+1]<-(theta*z[i]+x[i])}; plot(z,type=’l’)
+# ---------------------------
+# 1. REGRESSIONE LOGISTICA
+# ---------------------------
+logistic_model <- glm(Flag ~ ., data = trainData, family = "binomial")
+logistic_pred <- predict(logistic_model, newdata = testData, type = "response")
+logistic_class <- ifelse(logistic_pred > 0.5, 1, 0)
 
+# Valutazione del modello
+confusionMatrix(factor(logistic_class), factor(testData$Flag))
+roc_curve_logistic <- roc(testData$Flag, logistic_pred)
+plot(roc_curve_logistic, main = "ROC - Logistic Regression")
 
+# ---------------------------
+# 2. RANDOM FOREST
+# ---------------------------
+trainData$Flag <- factor(trainData$Flag, levels = c(0, 1))
+rf_model <- randomForest(Flag ~ ., data = trainData, ntree = 100)
+rf_pred <- predict(rf_model, newdata = testData, type = "response")
+rf_class <- ifelse(rf_pred == 1, 1, 0)
+confusionMatrix(factor(rf_class), factor(testData$Flag))
+# Valutazione del modello
+confusionMatrix(factor(rf_class), factor(testData$Flag))
+roc_curve_rf <- roc(testData$Flag, rf_pred)
+plot(roc_curve_rf, main = "ROC - Random Forest")
 
+# ---------------------------
+# 3. NEURAL NETWORK
+# ---------------------------
+# Converti Flag in variabile numerica per neuralnet
+trainData$Flag <- as.numeric(trainData$Flag)
+testData$Flag <- as.numeric(testData$Flag)
 
+# Crea una formula dinamica per neuralnet
+feature_names <- paste(names(trainData)[!names(trainData) %in% "Flag"], collapse = " + ")
+formula_nn <- as.formula(paste("Flag ~", feature_names))
 
-set.seed(154) # So that we can reproduce the results
-w = rnorm(200); x = cumsum(w)
-wd = w +.2; xd = cumsum(wd)
-# We set a limit for y considering all the lines
-plot(xd, ylim=c(-5,55), main="random walk", ylab="")
-# Different colour for the curve we are adding
-lines(x, col=4);
-# Different symbol for the straight lines
-abline(h=0, col=4, lty=2); abline(a=0, b=.2, lty=2)
+# Addestra la Neural Network
+nn_model <- neuralnet(formula_nn, data = trainData, hidden = c(5, 3), linear.output = FALSE)
+plot(nn_model)
 
+# Fai le previsioni con la Neural Network
+nn_pred <- compute(nn_model, testData[, setdiff(names(testData), "Flag")])$net.result
+nn_class <- ifelse(nn_pred > 0.5, 1, 0)
 
+# Valutazione del modello
+confusionMatrix(factor(nn_class), factor(testData$Flag))
+roc_curve_nn <- roc(testData$Flag, nn_pred)
+plot(roc_curve_nn, main = "ROC - Neural Network")
+
+# ---------------------------
+# CONFRONTO DEI MODELLI
+# ---------------------------
+# Calcola e confronta l'AUC per tutti i modelli
+auc_logistic <- auc(roc_curve_logistic)
+auc_rf <- auc(roc_curve_rf)
+auc_nn <- auc(roc_curve_nn)
+
+print(paste("AUC - Logistic Regression:", auc_logistic))
+print(paste("AUC - Random Forest:", auc_rf))
+print(paste("AUC - Neural Network:", auc_nn))
 
 
 
