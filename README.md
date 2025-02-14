@@ -141,9 +141,6 @@ Now watch the Correlation matrix
 
 METTI LA TEORIA DI OGNI MODELLO 
 
-To predict the "Flag" variable (which indicates if a company has defaulted), you could use the following models:
-
-
 METTERE SUMMARY DEI TEST E TRAINING SET
 
 MEttere pro e contro di ogni modello
