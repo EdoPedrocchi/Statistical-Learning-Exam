@@ -154,15 +154,27 @@ plot(roc_curve_logistic, main = "ROC - Logistic Regression")
 # ---------------------------
 # 2. RANDOM FOREST
 # ---------------------------
+
+
 trainData$Flag <- factor(trainData$Flag, levels = c(0, 1))
+testData$Flag <- factor(testData$Flag, levels = c(0, 1))
+
+
+set.seed(123)
 rf_model <- randomForest(Flag ~ ., data = trainData, ntree = 100)
-rf_pred <- predict(rf_model, newdata = testData, type = "response")
-rf_class <- ifelse(rf_pred == 1, 1, 0)
+
+
+rf_pred_prob <- predict(rf_model, newdata = testData, type = "prob")[,2]
+
+rf_class <- ifelse(rf_pred_prob > 0.5, 1, 0)
+
+
 confusionMatrix(factor(rf_class), factor(testData$Flag))
-# Valutazione del modello
-confusionMatrix(factor(rf_class), factor(testData$Flag))
-roc_curve_rf <- roc(testData$Flag, rf_pred)
+
+roc_curve_rf <- roc(as.numeric(as.character(testData$Flag)), rf_pred_prob)
 plot(roc_curve_rf, main = "ROC - Random Forest")
+
+
 
 # ---------------------------
 # 3. NEURAL NETWORK
