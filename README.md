@@ -188,7 +188,7 @@ e la toeria dietro
 
 
 
-### Random Forest - Confusion Matrix and Statistics  
+### metrics 
 
 | Metric                   | Value         |
 |---------------------------|---------------|
