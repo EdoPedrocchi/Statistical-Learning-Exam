@@ -197,29 +197,39 @@ Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
 
 ### Confusion Matrix
 
-| Prediction | 0   | 1   |
-|------------|-----|-----|
-| **0**      | 576 | 15  |
-| **1**      | 6   | 17  |
+Ecco i risultati formattati in una tabella per un README su GitHub:  
 
-### Statistiche del Modello
+---
 
-| **Statistica**           | **Valore**  |
-|--------------------------|-------------|
-| **Accuracy**             | 0.9658      |
-| **95% CI**               | (0.9482, 0.9787) |
-| **No Information Rate**  | 0.9479      |
-| **P-Value [Acc > NIR]**  | 0.02315     |
-| **Kappa**                | 0.6008      |
-| **Mcnemar's Test P-Value**| 0.08086    |
-| **Sensitivity**          | 0.9897      |
-| **Specificity**          | 0.5312      |
-| **Positive Predictive Value** | 0.9746  |
-| **Negative Predictive Value** | 0.7391 |
-| **Prevalence**           | 0.9479      |
-| **Detection Rate**       | 0.9381      |
-| **Detection Prevalence** | 0.9625      |
-| **Balanced Accuracy**    | 0.7605      |
+### Random Forest - Confusion Matrix and Statistics  
+
+| Metric                   | Value         |
+|---------------------------|---------------|
+| **Accuracy**              | 0.9642        |
+| **95% CI**                | (0.9463, 0.9774) |
+| **No Information Rate**   | 0.9479        |
+| **P-Value [Acc > NIR]**   | 0.03683       |
+| **Kappa**                 | 0.5745        |
+| **Mcnemar's Test P-Value**| 0.05501       |
+| **Sensitivity**           | 0.9897        |
+| **Specificity**           | 0.5000        |
+| **Pos Pred Value**        | 0.9730        |
+| **Neg Pred Value**        | 0.7273        |
+| **Prevalence**            | 0.9479        |
+| **Detection Rate**        | 0.9381        |
+| **Detection Prevalence**  | 0.9642        |
+| **Balanced Accuracy**     | 0.7448        |
+
+---
+
+### Confusion Matrix
+
+|               | **Reference: 0** | **Reference: 1** |
+|---------------|------------------|------------------|
+| **Prediction: 0** | 576              | 16               |
+| **Prediction: 1** | 6                | 16               |
+
+![7275d9c1-e89c-4fc5-b005-cf6f4e3763ba](https://github.com/user-attachments/assets/54de26c0-694f-4621-9c57-78442a3ca7f5)
 
 
 5. **Neural Networks**  
@@ -228,7 +238,7 @@ Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
 
 [Quartz 4.pdf](https://github.com/user-attachments/files/18789959/Quartz.4.pdf)
 
-Ecco la tabella con i risultati per il README di GitHub:
+
 
 ### Confusion Matrix and Statistics
 
