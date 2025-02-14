@@ -11,12 +11,15 @@
 
 ## Introduction  
 
-Title, Author
-2. Your thesis (research question)
-3. Models employed (and related R packages) 4. Main empirical findings
+The project aims to predict the default of Italian Small and Medium Enterprises (SMEs) using various statistical learning techniques. The primary research question guiding this analysis is:  
 
+**"Which statistical learning approach provides the most accurate and reliable predictions for SME default risk in Italy?"**  
 
-Our goal: predict the defalut of a company 1 year before.
+To address this, the project evaluates and compares 2 approaches:
+1. Financial Learning (Frequentist approach)
+2. Bayesian Learning
+
+Describe In general financial Learning and Bayesian learning
 
 Find research topic similar
 
@@ -38,8 +41,11 @@ The variables of the dataset:
 - Current_assets  
 - Net_income_on_Total_Assets  
 - Leverage  
-- Tangible_on_total_assets  
+- Tangible_on_total_assets
 
+  PUORUI CREARE NUOVI INDICATORI?
+
+DESCRIBE EACH VARIABLE WHAT REPRESENT
 
 
 ## EDA (Exploratory Data Analysis)  
@@ -132,6 +138,9 @@ Now watch the Correlation matrix
 
 
 ## Financial Learning  
+
+METTI LA TEORIA DI OGNI MODELLO 
+
 To predict the "Flag" variable (which indicates if a company has defaulted), you could use the following models:
 
 
@@ -142,12 +151,6 @@ e la toeria dietro
    
 1. **Logistic Regression**  
 
-confusion matrix on the result of logistic regression
-
-Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
-
----
-
 ## Logistic Regression Model Evaluation
 
 ### Confusion Matrix
@@ -157,7 +160,7 @@ Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
 | **0**      | 578 | 30  |
 | **1**      | 4   | 2   |
 
-### Performance Metrics
+###  Metrics
 
 | Metric                             | Value         |
 |------------------------------------|---------------|
@@ -176,11 +179,6 @@ Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
 | **Detection Prevalence**           | 99.02%        |
 | **Balanced Accuracy**              | 52.78%        |
 
-### Notes:
-- The **model** shows high sensitivity (99.31%) but **low specificity** (6.25%).
-- **Accuracy** is 94.46%, but the low specificity suggests that the model might be biased toward predicting the majority class (0).
-- **Kappa** is low, indicating that the agreement between predicted and actual values is not great.
-- The **positive class** is 0 in this case, as shown in the "Positive Class" row.
 
   
 ![fa3a99a1-9f84-4f07-9982-7216228b6872](https://github.com/user-attachments/assets/beb45a47-0b9d-4e02-82c3-7a30312951e2)
@@ -190,16 +188,8 @@ Ecco come puoi inserire i risultati in tabelle Markdown per il README su GitHub:
 
 
 2. **Random Forest**  
-   - **Pros**: Handles non-linearities well, robust to overfitting with many trees.  
-   - **Cons**: Can be less interpretable, requires tuning.
-  
-3. Ecco come puoi organizzare i risultati in tabelle per il tuo README di GitHub:
 
-### Confusion Matrix
 
-Ecco i risultati formattati in una tabella per un README su GitHub:  
-
----
 
 ### Random Forest - Confusion Matrix and Statistics  
 
@@ -233,11 +223,8 @@ Ecco i risultati formattati in una tabella per un README su GitHub:
 
 
 5. **Neural Networks**  
-   - **Pros**: Powerful for complex patterns in large datasets.  
-   - **Cons**: Requires a large amount of data, difficult to interpret.
-
+ 
 [Quartz 4.pdf](https://github.com/user-attachments/files/18789959/Quartz.4.pdf)
-
 
 
 ### Confusion Matrix and Statistics
