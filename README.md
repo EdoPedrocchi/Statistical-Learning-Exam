@@ -257,14 +257,68 @@ e la toeria dietro
 
 
 
-## MOdels confront
+## Models confront
 
 
 
 
 ## Bayesian Learning  
 
-...  
+To predict the "Flag" variable (Active vs. Defaulted) using Bayesian statistics, we would follow these steps:
 
+### **1. Understand the Dataset**
+The dataset contains financial indicators (standardized values) for 2049 Italian SMEs from 2018, with their status (Active or Defaulted) in 2019. Our goal is to predict whether a company will default using Bayesian methods.
+
+### **2. Define the Bayesian Model**
+Bayesian statistics involve updating prior beliefs with new evidence (data). We need to model the probability of a company defaulting based on its financial indicators.
+
+- Let \( Y \) be the binary outcome (Flag: 0 = Active, 1 = Defaulted).
+- Let \( X \) be the financial indicators available in 2018.
+- We model the probability of default using a **Bayesian logistic regression**:
+  \[
+  P(Y = 1 | X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_n X_n)}}
+  \]
+  where:
+  - \( \beta_0 \) is the intercept.
+  - \( \beta_i \) are the coefficients for each financial indicator \( X_i \).
+
+### **3. Specify Priors**
+In Bayesian inference, we assign prior distributions to the parameters \( \beta \). Common choices include:
+- **Normal priors**: \( \beta_i \sim N(0, \tau^2) \), assuming most coefficients are small.
+- **Weakly informative priors**: To avoid overfitting, we use priors that reflect our belief that financial indicators affect default risk but are not extreme.
+- **Hierarchical priors** (if applicable): If the data has grouped structures (e.g., industry sectors), we might use hierarchical priors.
+
+### **4. Perform Bayesian Inference**
+We use Bayes' theorem to update our beliefs given the data:
+\[
+P(\beta | \text{data}) \propto P(\text{data} | \beta) P(\beta)
+\]
+- **Likelihood**: The probability of observing the data given the logistic regression model.
+- **Prior**: Our initial belief about the parameters before seeing the data.
+- **Posterior**: The updated belief about the parameters after observing the data.
+
+This step is typically done using **Markov Chain Monte Carlo (MCMC)** methods, such as:
+- Hamiltonian Monte Carlo (HMC) via **Stan** or **PyMC**.
+- Variational inference (approximate Bayesian inference).
+
+### **5. Model Evaluation**
+To assess the model's predictive ability:
+- **Posterior predictive checks**: Compare the predicted vs. actual outcomes.
+- **Accuracy, Precision, Recall**: Evaluate classification performance.
+- **ROC Curve & AUC**: Measure model discrimination ability.
+- **Bayesian model comparison**: Compare models using metrics like **WAIC** (Widely Applicable Information Criterion) or **LOO-CV** (Leave-One-Out Cross-Validation).
+
+### **6. Make Predictions**
+Once we have estimated the posterior distributions for \( \beta \), we can:
+- Compute the probability of default for new companies.
+- Use a decision threshold (e.g., \( P(Y=1) > 0.5 \)) to classify companies as Active or Defaulted.
+- Incorporate uncertainty in predictions (e.g., provide probability distributions instead of point estimates).
+
+### **7. Interpret Results**
+- Identify the most influential financial indicators (by looking at posterior distributions of \( \beta \)).
+- Assess the uncertainty of predictions (e.g., posterior credible intervals).
+- Provide insights for risk management (e.g., which financial factors are most predictive of default).
+
+Would you like me to inspect the dataset to determine the specific financial indicators available?
 ## Conclusions  
 ...  
