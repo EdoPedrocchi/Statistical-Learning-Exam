@@ -1,3 +1,13 @@
+-rifare codice, senza standard
+poi standardizza per logidtic regression e nn
+poi utilizza librerie e comandi della prof
+
+
+
+
+
+
+
 [LINK](https://edopedrocchi.github.io/Statistical-Learning-Exam/)
 # Statistical-Learning-Exam
 
