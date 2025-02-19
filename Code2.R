@@ -417,4 +417,69 @@ print(mean(outs))
 
 
 
+
+#####algortmo moificato, quello sopra non è di classficiazione
+# Train a neural network model on the dataset
+nn <- neuralnet(Flag ~ ., data=train,
+                hidden=c(5),  # Define one hidden layer with 5 neurons
+                act.fct="logistic",  # Use logistic activation function
+                err.fct='ce',  # Use cross-entropy error function
+                linear.output=FALSE,  # Output is categorical, not continuous
+                lifesign="minimal")  # Show minimal training progress output
+
+# Plot the trained neural network model
+plot(nn)
+
+##### Compute predictions #####
+# Generate predictions on the test dataset
+nn_pred <- compute(nn, test[, -which(names(test) == "Flag")])
+
+# Extract predicted results
+nn_pred1 <- nn_pred$net.result
+
+# Convert predictions to class labels
+predicted <- ifelse(nn_pred1 > 0.5, 1, 0)
+
+# Evaluate accuracy
+accuracy <- mean(predicted == as.numeric(as.character(test$Flag)))  # Compute accuracy
+print(accuracy)  # Print the accuracy of the model
+
+##### Cross-validation #####
+# Initialize an empty vector to store accuracy results
+outs <- NULL
+
+# Define number of folds for cross-validation
+k <- 10  # 10-fold cross-validation
+set.seed(123)  # Set seed for reproducibility
+
+# Perform k-fold cross-validation
+for(i in 1:k) {
+  index <- sample(1:nrow(train), round(0.8 * nrow(train)))  # Randomly select training indices
+  train_cv <- train[index, ]  # Create training subset
+  test_cv <- train[-index, ]  # Create testing subset
+  
+  # Train neural network on training subset
+  nn_cv <- neuralnet(Flag ~ ., data=train_cv,
+                     hidden=c(5),  # Use the same hidden layer configuration
+                     act.fct="logistic",  # Use logistic activation function
+                     err.fct="ce",  # Use cross-entropy error function
+                     linear.output=FALSE)  # Categorical output
+  
+  # Generate predictions on the test set
+  nn_pred <- compute(nn_cv, test_cv[, -which(names(test_cv) == "Flag")])
+  
+  # Extract predicted results
+  nn_pred1 <- nn_pred$net.result
+  
+  # Convert predictions to class labels
+  predicted <- ifelse(nn_pred1 > 0.5, 1, 0)
+  
+  # Evaluate accuracy
+  outs[i] <- mean(predicted == as.numeric(as.character(test_cv$Flag)))  # Store accuracy result
+}
+
+# Compute and print the mean accuracy across all folds
+print(mean(outs))
+
+
 #########################Bayesian Learning######################################################
