@@ -482,4 +482,12 @@ for(i in 1:k) {
 print(mean(outs))
 
 
+manca safe ai
+
+
 #########################Bayesian Learning######################################################
+
+LOgistic regression
+
+Bayesian networks
+
