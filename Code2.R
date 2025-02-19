@@ -27,6 +27,11 @@ data <- read_excel(dataset_path)
 data<-as.data.frame(data)
 
 
+
+library(nnet)
+library(neuralnet)
+
+
 ########################## EDA #####################################################
 
 
@@ -304,38 +309,111 @@ col=c('blue','grey','red','green'),lwd=c(1,2,3), cex=0.7)
 
 
 #### 3. NEURAL NETWORK
+###########################
+##### NEURAL NETWORK #####
+###########################
 
-# Convert Flag in numeric variable 
-trainData$Flag <- as.numeric(trainData$Flag)
-testData$Flag <- as.numeric(testData$Flag)
+# Clear the environment to remove all existing objects
+rm(list=ls())
 
+# Install necessary packages (remove the # to install them if needed)
+#install.packages("readr")  # For reading CSV files
+install.packages("nnet")    # For neural networks
+install.packages("neuralnet")  # For training deep learning models
 
-feature_names <- paste(names(trainData)[!names(trainData) %in% "Flag"], collapse = " + ")
-formula_nn <- as.formula(paste("Flag ~", feature_names))
+# Load required libraries
+library(readr)     # Load readr for data handling
+library(nnet)      # Load nnet for neural network functions
+library(neuralnet) # Load neuralnet for training neural networks
 
+#####################################
+########## APPLICATION FLAG #########
+#####################################
 
-nn_model <- neuralnet(formula_nn, data = trainData, hidden = c(5, 3), linear.output = FALSE)
-plot(nn_model)
+# Import dataset
+# Assuming "data.csv" contains the dataset with the "Flag" column
+# data <- read_csv("path/data.csv")
 
+# Convert dataset to a dataframe for easy manipulation
+data <- as.data.frame(data)
 
-nn_pred <- compute(nn_model, testData[, setdiff(names(testData), "Flag")])$net.result
-nn_class <- ifelse(nn_pred > 0.5, 1, 0)
+# Generate summary statistics of the dataset
+summary(data)
 
+# Show frequency of each class in the Flag column
+table(data$Flag)
 
-confusionMatrix(factor(nn_class), factor(testData$Flag))
-roc_curve_nn <- roc(testData$Flag, nn_pred)
-plot(roc_curve_nn, main = "ROC - Neural Network")
+# Encode the binary dependent variable (Flag) into dummy variables
+train <- cbind(data[, -which(names(data) == "Flag")], class.ind(as.factor(data$Flag)))
 
+# Rename columns: Keep the original feature names and add "F0" and "F1" for the encoded target variable
+names(train) <- c(names(data)[-which(names(data) == "Flag")], "F0", "F1")
 
-##########Models Confront
-#Confront a AUC for all models
-auc_logistic <- auc(roc_curve_logistic)
-auc_rf <- auc(roc_curve_rf)
-auc_nn <- auc(roc_curve_nn)
+# Train a neural network model on the dataset
+set.seed(123)  # Set seed for reproducibility
+nn <- neuralnet(F0 + F1 ~ ., data=train,
+                hidden=c(5),  # Define one hidden layer with 5 neurons
+                act.fct="logistic",  # Use logistic activation function
+                err.fct='ce',  # Use cross-entropy error function
+                linear.output=FALSE,  # Output is categorical, not continuous
+                lifesign="minimal")  # Show minimal training progress output
 
-print(paste("AUC - Logistic Regression:", auc_logistic))
-print(paste("AUC - Random Forest:", auc_rf))
-print(paste("AUC - Neural Network:", auc_nn))
+# Plot the trained neural network model
+plot(nn)
+
+##### Compute predictions #####
+# Generate predictions on the training dataset
+nn_pred <- compute(nn, train[, 1:(ncol(train) - 2)])
+
+# Extract predicted results
+nn_pred1 <- nn_pred$net.result
+head(nn_pred1)  # Display first few predictions
+
+# Calculate in-sample accuracy
+original_values <- max.col(train[, (ncol(train) - 1):ncol(train)])  # Extract actual class labels
+predicted <- max.col(nn_pred1)  # Get predicted class labels
+accuracy <- mean(predicted == original_values)  # Compute accuracy
+print(accuracy)  # Print the accuracy of the model
+
+##### Cross-validation #####
+# Initialize an empty vector to store accuracy results
+outs <- NULL
+
+# Set proportion for train-test split
+proportion <- 0.80  # 80% training, 20% testing
+
+# Define number of folds for cross-validation
+k <- 10  # 10-fold cross-validation
+set.seed(123)  # Set seed for reproducibility
+
+# Perform k-fold cross-validation
+for(i in 1:k) {
+  index <- sample(1:nrow(train), round(proportion * nrow(train)))  # Randomly select training indices
+  train_cv <- train[index, ]  # Create training subset
+  test_cv <- train[-index, ]  # Create testing subset
+  
+  # Train neural network on training subset
+  nn_cv <- neuralnet(F0 + F1 ~ ., data=train_cv,
+                     hidden=c(5),  # Use the same hidden layer configuration
+                     act.fct="logistic",  # Use logistic activation function
+                     err.fct="ce",  # Use cross-entropy error function
+                     linear.output=FALSE)  # Categorical output
+  
+  # Generate predictions on the test set
+  nn_pred <- compute(nn_cv, test_cv[, 1:(ncol(train) - 2)])
+  
+  # Extract predicted results
+  nn_pred1 <- nn_pred$net.result
+  
+  # Evaluate accuracy
+  original_values <- max.col(test_cv[, (ncol(train) - 1):ncol(train)])  # Extract actual class labels
+  predicted <- max.col(nn_pred1)  # Get predicted class labels
+  outs[i] <- mean(predicted == original_values)  # Store accuracy result
+}
+
+# Compute and print the mean accuracy across all folds
+print(mean(outs))
+
 
 
 
