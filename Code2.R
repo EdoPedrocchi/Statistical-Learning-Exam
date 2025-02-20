@@ -48,25 +48,31 @@ attach(data)
 
 
 ## Get default rate
-def_perc<-sum(data$Default)/length(data$Default)
+def_perc<-sum(data$Flag)/length(data$Flag)
 print(def_perc)
 
-
-for (col in names(data)) {
-  print(ggplot(data, aes(x = .data[[col]])) +
-    geom_histogram(bins = 30, fill = "blue", alpha = 0.6) +
-    labs(title = col, x = col, y = "Frequenza") +
-    theme_minimal())
-  Sys.sleep(1)  # Pausa di 1 secondo tra i grafici
+numeric_columns <- names(data)[sapply(data, is.numeric)]
 
 
-for (col in names(data)) {
-  print(ggplot(data, aes(y = .data[[col]])) +
-    geom_boxplot(fill = "blue", alpha = 0.6) +
-    labs(title = col, y = col) +
-    theme_minimal())
-  Sys.sleep(1)  # Pausa di 1 secondo tra i grafici
+for (col in numeric_columns) {
+  print(
+    ggplot(data, aes(x = .data[[col]])) +
+      geom_histogram(bins = 30, fill = "blue", alpha = 0.6) +
+      labs(title = col, x = col, y = "Frequenza") +
+      theme_minimal()
+  )
+  Sys.sleep(1)  
+}
 
+  for (col in numeric_columns) {
+    print(
+      ggplot(data, aes(y = .data[[col]])) +
+        geom_boxplot(fill = "lightblue", outlier.color = "red", outlier.shape = 16) +
+        labs(title = paste("Boxplot di", col), y = col) +
+        theme_minimal()
+    )
+    Sys.sleep(1)  # Pausa di 1 secondo tra i grafici
+  }
 
 cor(data[, sapply(data, is.numeric)])
 
