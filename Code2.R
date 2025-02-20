@@ -117,8 +117,8 @@ data.train<-data_sample[1:n_train,]
 data.test<-data_sample[(n_train+1):nrow(data_sample),]    
 
 
-summary(trainData)
-summary(testData)
+    summary(data.train)
+    summary(data.test)
 
 
 
